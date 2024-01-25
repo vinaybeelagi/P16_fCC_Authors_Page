@@ -22,3 +22,38 @@ fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
     authorContainer.innerHTML = '<p class="error-msg">There was an error loading the authors</p>';
   });
 
+// Function to fetch and display more authors when the "Load More" button is clicked
+const fetchMoreAuthors = () => {
+  // Update the index range for the next set of authors
+  startingIndex += 8;
+  endingIndex += 8;
+
+  // Display the next set of authors
+  displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
+
+  // Check if there are no more authors to load
+  if (authorDataArr.length <= endingIndex) {
+    // Disable the "Load More" button and update its appearance
+    loadMoreBtn.disabled = true;
+    loadMoreBtn.style.cursor = "not-allowed";
+    loadMoreBtn.textContent = 'No more data to load';
+  }
+};
+
+// Function to display authors in the HTML
+const displayAuthors = (authors) => {
+  // Loop through the authors and add HTML elements for each author to the container
+  authors.forEach(({ author, image, url, bio }, index) => {
+    authorContainer.innerHTML += `
+      <div id="${index}" class="user-card">
+        <h2 class="author-name">${author}</h2>
+        <img class="user-img" src="${image}" alt="${author} avatar">
+        <div class="purple-divider"></div>
+        <p class="bio">${bio.length > 50 ? bio.slice(0, 50) + '...' : bio}</p>
+        <a class="author-link" href="${url}" target="_blank">${author} author page</a>
+      </div>
+    `;
+  });
+};
+
+
