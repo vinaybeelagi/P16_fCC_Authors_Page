@@ -7,3 +7,18 @@ let startingIndex = 0;
 let endingIndex = 8;
 let authorDataArr = [];
 
+// Fetch author data from the provided JSON file
+fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
+  .then((res) => res.json())
+  .then((data) => {
+    // Store the fetched data in the authorDataArr
+    authorDataArr = data;
+
+    // Display the initial set of authors
+    displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
+  })
+  .catch((err) => {
+    // Display an error message if fetching fails
+    authorContainer.innerHTML = '<p class="error-msg">There was an error loading the authors</p>';
+  });
+
