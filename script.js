@@ -55,5 +55,7 @@ const displayAuthors = (authors) => {
     `;
   });
 };
+// Add an event listener to the Load More button to trigger fetching more authors
+loadMoreBtn.addEventListener('click', fetchMoreAuthors);
 
 
